@@ -7,11 +7,11 @@
 
 import Foundation
 
-func img(attributes: HTMLAttribute...) -> Image {
+public func img(attributes: HTMLAttribute...) -> Image {
     Image(attributes: attributes)
 }
 
-struct Image: HTMLElement {
-    static var tag: String = "img"
-    var attributes: [HTMLAttribute]
+public struct Image: HTMLElement {
+    public static var tag: String = "img"
+    public var attributes: [HTMLAttribute]
 }

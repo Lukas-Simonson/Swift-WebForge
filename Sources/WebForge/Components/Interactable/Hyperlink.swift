@@ -7,16 +7,16 @@
 
 import Foundation
 
-func a(attributes: HTMLAttribute..., body: String = "") -> Hyperlink {
+public func a(attributes: HTMLAttribute..., body: String = "") -> Hyperlink {
     Hyperlink(attributes: attributes, body: [body])
 }
 
-struct Hyperlink: HTMLParent {
-    static var tag: String = "a"
-    var attributes: [HTMLAttribute]
-    var body: [HTMLRenderable]
+public struct Hyperlink: HTMLParent {
+    public static var tag: String = "a"
+    public var attributes: [HTMLAttribute]
+    public var body: [HTMLRenderable]
     
-    init(attributes: [HTMLAttribute], body: [HTMLRenderable]) {
+    public init(attributes: [HTMLAttribute], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }
