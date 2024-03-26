@@ -7,20 +7,24 @@
 
 import Foundation
 
-public func h1(_ body: String) -> HTMLElement {
-    return HeadingOne(body: body)
+public func h1(_ body: String) -> HeadingOne {
+    return HeadingOne(body: [body])
 }
 
-public func h1(attributes: HTMLAttribute..., body: String) -> HTMLElement {
+public func h1(attributes: HTMLAttribute..., body: String) -> HeadingOne {
+    return HeadingOne(attributes: attributes, body: [body])
+}
+
+public func h1(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> HeadingOne {
     return HeadingOne(attributes: attributes, body: body)
 }
 
-struct HeadingOne: HTMLTextBodied {
-    static var tag = "h1"
-    var attributes: [HTMLAttribute] = []
-    var body: String
+public struct HeadingOne: HTMLParent {
+    public static var tag = "h1"
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    init(attributes: [HTMLAttribute] = [], body: String = "") {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

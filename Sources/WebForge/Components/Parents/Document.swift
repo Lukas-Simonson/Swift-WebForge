@@ -7,17 +7,18 @@
 
 import Foundation
 
-public func document(@HTMLBodyBuilder children: () -> [HTMLElement]) -> Document {
-    return Document(children)
+public func document(@HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Document {
+    return Document(body: body)
 }
 
 public struct Document: HTMLParent {
     public static let tag: String = "DOCTYPE"
-    public var attributes: [HTMLAttribute] = []
-    public let children: [HTMLElement]
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(@HTMLBodyBuilder _ children: () -> [HTMLElement]) {
-        self.children = children()
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
+        self.attributes = attributes
+        self.body = body
     }
     
     public func render() -> String {

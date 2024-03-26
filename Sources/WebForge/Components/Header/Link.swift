@@ -7,13 +7,13 @@
 
 import Foundation
 
-public func link(attributes: HTMLAttribute...) -> HTMLElement {
+public func link(attributes: HTMLAttribute...) -> Link {
     return Link(attributes: attributes)
 }
 
 public struct Link: HTMLElement {
     public static let tag: String = "link"
-    public var attributes: [HTMLAttribute]
+    public let attributes: [HTMLAttribute]
     
     public init(attributes: [HTMLAttribute] = []) {
         self.attributes = attributes

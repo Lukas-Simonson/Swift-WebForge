@@ -2,17 +2,21 @@
 //  File.swift
 //  
 //
-//  Created by Lukas Simonson on 3/11/24.
+//  Created by Lukas Simonson on 3/25/24.
 //
 
 import Foundation
 
-public protocol HTMLParent: HTMLCorporeal {
-    var children: [HTMLElement] { get }
+public protocol HTMLParent: HTMLElement, HTMLBodiable {
+    init(attributes: [HTMLAttribute], body: [HTMLRenderable])
 }
 
 public extension HTMLParent {
-    func renderBody() -> String {
-        return String(children.reduce("") { $0 + $1.render() + "\n" }.dropLast())
+    init(attributes: [HTMLAttribute] = [], @HTMLBodyBuilder body: () -> [HTMLRenderable]) {
+        self.init(attributes: attributes, body: body())
+    }
+    
+    func render() -> String {
+        return "<\(Self.tag)\(self.renderAttributes())>\(self.renderBody())</\(Self.tag)>"
     }
 }

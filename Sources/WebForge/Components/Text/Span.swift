@@ -8,19 +8,23 @@
 import Foundation
 
 public func span(_ body: String) -> Span {
-    return Span(body: body)
+    return Span(body: [body])
 }
 
 public func span(attributes: HTMLAttribute..., body: String) -> Span {
+    return Span(attributes: attributes, body: [body])
+}
+
+public func span(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Span {
     return Span(attributes: attributes, body: body)
 }
 
-public struct Span: HTMLTextBodied {
+public struct Span: HTMLParent {
     public static let tag: String = "span"
-    public var attributes: [HTMLAttribute]
-    public let body: String
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], body: String) {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

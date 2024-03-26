@@ -8,15 +8,19 @@
 import Foundation
 
 public func button(attributes: HTMLAttribute..., body: String = "") -> HTMLElement {
+    return Button(attributes: attributes, body: [body])
+}
+
+public func button(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Button {
     return Button(attributes: attributes, body: body)
 }
 
-public struct Button: HTMLTextBodied {
+public struct Button: HTMLParent {
     public static let tag: String = "button"
-    public var attributes: [HTMLAttribute] = []
-    public let body: String
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], body: String = "") {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

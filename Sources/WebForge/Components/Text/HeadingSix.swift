@@ -7,16 +7,24 @@
 
 import Foundation
 
-public func h6(attributes: HTMLAttribute..., body: String) -> HTMLElement {
+public func h6(_ body: String) -> HeadingSix {
+    return HeadingSix(body: [body])
+}
+
+public func h6(attributes: HTMLAttribute..., body: String) -> HeadingSix {
+    return HeadingSix(attributes: attributes, body: [body])
+}
+
+public func h6(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> HeadingSix {
     return HeadingSix(attributes: attributes, body: body)
 }
 
-public struct HeadingSix: HTMLTextBodied {
+public struct HeadingSix: HTMLParent {
     public static var tag = "h6"
-    public var attributes: [HTMLAttribute] = []
-    public var body: String
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], body: String = "") {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

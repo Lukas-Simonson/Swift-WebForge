@@ -7,17 +7,17 @@
 
 import Foundation
 
-public func head(attributes: HTMLAttribute..., @HTMLBodyBuilder children: () -> [HTMLElement]) -> HTMLElement {
-    return Head(attributes: attributes, children: children)
+public func head(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Head {
+    return Head(attributes: attributes, body: body)
 }
 
 public struct Head: HTMLParent {
     public static let tag: String = "head"
-    public var attributes: [HTMLAttribute] = []
-    public let children: [HTMLElement]
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], @HTMLBodyBuilder children: () -> [HTMLElement]) {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
-        self.children = children()
+        self.body = body
     }
 }

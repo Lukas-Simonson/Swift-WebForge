@@ -7,16 +7,24 @@
 
 import Foundation
 
-public func h3(attributes: HTMLAttribute..., body: String) -> HTMLElement {
+public func h3(_ body: String) -> HeadingThree {
+    return HeadingThree(body: [body])
+}
+
+public func h3(attributes: HTMLAttribute..., body: String) -> HeadingThree {
+    return HeadingThree(attributes: attributes, body: [body])
+}
+
+public func h3(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> HeadingThree {
     return HeadingThree(attributes: attributes, body: body)
 }
 
-public struct HeadingThree: HTMLTextBodied {
+public struct HeadingThree: HTMLParent {
     public static var tag = "h3"
-    public var attributes: [HTMLAttribute] = []
-    public var body: String
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], body: String = "") {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

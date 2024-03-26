@@ -7,16 +7,24 @@
 
 import Foundation
 
-public func h2(attributes: HTMLAttribute..., body: String) -> HTMLElement {
+public func h2(_ body: String) -> HeadingTwo {
+    return HeadingTwo(body: [body])
+}
+
+public func h2(attributes: HTMLAttribute..., body: String) -> HeadingTwo {
+    return HeadingTwo(attributes: attributes, body: [body])
+}
+
+public func h2(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> HeadingTwo {
     return HeadingTwo(attributes: attributes, body: body)
 }
 
-struct HeadingTwo: HTMLTextBodied {
-    static var tag = "h2"
-    var attributes: [HTMLAttribute] = []
-    var body: String
+public struct HeadingTwo: HTMLParent {
+    public static var tag = "h2"
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    init(attributes: [HTMLAttribute] = [], body: String = "") {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

@@ -7,16 +7,17 @@
 
 import Foundation
 
-public func style(attributes: HTMLAttribute..., body: String) -> HTMLElement {
+public func style(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Style {
     return Style(attributes: attributes, body: body)
 }
 
-public struct Style: HTMLTextBodied {
-    public static var tag = "style"
-    public var attributes: [HTMLAttribute] = []
-    public var body: String
+public struct Style: HTMLParent {
     
-    public init(attributes: [HTMLAttribute] = [], body: String = "") {
+    public static var tag = "style"
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
+    
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

@@ -8,19 +8,23 @@
 import Foundation
 
 public func label(_ body: String) -> Label {
-    return Label(body: body)
+    return Label(body: [body])
 }
 
 public func label(attributes: HTMLAttribute..., body: String) -> Label {
+    return Label(attributes: attributes, body: [body])
+}
+
+public func label(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Label {
     return Label(attributes: attributes, body: body)
 }
 
-public struct Label: HTMLTextBodied {
+public struct Label: HTMLParent {
     public static let tag: String = "label"
-    public var attributes: [HTMLAttribute]
-    public let body: String
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], body: String) {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }

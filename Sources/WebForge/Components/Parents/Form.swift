@@ -7,23 +7,23 @@
 
 import Foundation
 
-public func form(attributes: HTMLAttribute..., @HTMLBodyBuilder children: () -> [HTMLElement]) -> HTMLElement {
-    return Form(attributes: attributes, children: children)
+public func form(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Form {
+    return Form(attributes: attributes, body: body)
 }
 
 public struct Form: HTMLParent {
     public static let tag: String = "form"
-    public var attributes: [HTMLAttribute] = []
-    public let children: [HTMLElement]
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], @HTMLBodyBuilder children: () -> [HTMLElement]) {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
-        self.children = children()
+        self.body = body
     }
 }
 
 public extension Form {
-    public enum InputType: String {
+    enum InputType: String {
         case button
         case checkbox
         case color

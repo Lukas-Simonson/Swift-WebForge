@@ -7,13 +7,13 @@
 
 import Foundation
 
-public func meta(attributes: HTMLAttribute...) -> HTMLElement {
+public func meta(attributes: HTMLAttribute...) -> Meta {
     return Meta(attributes: attributes)
 }
 
 public struct Meta: HTMLElement {
     public static let tag: String = "meta"
-    public var attributes: [HTMLAttribute]
+    public let attributes: [HTMLAttribute]
     
     public init(attributes: [HTMLAttribute] = []) {
         self.attributes = attributes

@@ -10,3 +10,9 @@ import Foundation
 public protocol HTMLRenderable {
     func render() -> String
 }
+
+extension String: HTMLRenderable {
+    public func render() -> String {
+        return self
+    }
+}

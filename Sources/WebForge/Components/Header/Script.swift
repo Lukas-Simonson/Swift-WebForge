@@ -7,16 +7,16 @@
 
 import Foundation
 
-public func script(attributes: HTMLAttribute..., body: String = "") -> HTMLElement {
+public func script(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [HTMLRenderable]) -> Script {
     return Script(attributes: attributes, body: body)
 }
 
-public struct Script: HTMLTextBodied {
+public struct Script: HTMLParent {
     public static let tag: String = "script"
-    public var attributes: [HTMLAttribute] = []
-    public var body: String
+    public let attributes: [HTMLAttribute]
+    public let body: [HTMLRenderable]
     
-    public init(attributes: [HTMLAttribute] = [], body: String = "") {
+    public init(attributes: [HTMLAttribute] = [], body: [HTMLRenderable]) {
         self.attributes = attributes
         self.body = body
     }
