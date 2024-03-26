@@ -11,6 +11,10 @@ public func script(attributes: HTMLAttribute..., @HTMLBodyBuilder body: () -> [H
     return Script(attributes: attributes, body: body)
 }
 
+public func script(attributes: HTMLAttribute...) -> Script {
+    return Script(attributes: attributes, body: [])
+}
+
 public struct Script: HTMLParent {
     public static let tag: String = "script"
     public let attributes: [HTMLAttribute]
