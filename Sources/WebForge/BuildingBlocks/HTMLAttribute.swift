@@ -26,7 +26,7 @@ public extension HTMLAttribute {
         return value == nil ? key : "\(key)=\"\(value!)\""
     }
     
-    static func custom(key: String, value: String) -> HTMLAttribute {
+    static func custom(key: String, value: String?) -> HTMLAttribute {
         return HTMLAttribute(key: key, value: value)
     }
     
